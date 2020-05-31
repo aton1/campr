@@ -1,0 +1,26 @@
+.card {
+  margin-top: 25px;
+  margin-bottom: 80px;
+}
+
+.card-title {
+  display:flex; 
+  flex-wrap: wrap;
+}
+
+.form-title {
+  text-align: center;
+}
+
+.img-thumbnail img {
+  width: 100%;
+}
+
+.new-form {
+  width: 50%;
+  margin: 25px auto;
+}
+
+nav {
+  margin-bottom: 25px;
+}
