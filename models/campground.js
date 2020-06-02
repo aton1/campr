@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const campgroundSchema = new mongoose.Schema({
   name: String,
@@ -7,9 +7,9 @@ const campgroundSchema = new mongoose.Schema({
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment"
-    }
-  ]
+      ref: 'Comment',
+    },
+  ],
 });
 
-module.exports = mongoose.model("Campground", campgroundSchema);
+module.exports = mongoose.model('Campground', campgroundSchema);
