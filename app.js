@@ -1,6 +1,9 @@
 const express = require("express"),
       bodyParser = require("body-parser"),
       mongoose = require("mongoose"),
+      passport = require("passport"),
+      localStrategy = require("passport-local"),
+      User = require("./models/user"),
       Campground = require("./models/campground"),
       Comment = require("./models/comment"),
       seedDB = require("./seeds"),
@@ -12,6 +15,25 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
 
 seedDB();
+
+// passport config
+app.use(require("express-session")({
+  secret: "aton123",
+  resave: false,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// middleware that will run for every route to pass in the username/username._id for navbar links
+app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
+  next();
+});
 
 // index
 app.get("/", (req, res) => {
@@ -30,7 +52,7 @@ app.get("/campgrounds", (req, res) => {
 });
 
 // new
-app.get("/campgrounds/new", (req, res) => {
+app.get("/campgrounds/new", isLoggedIn, (req, res) => {
   res.render("campgrounds/new");
 });
 
@@ -59,7 +81,8 @@ app.get("/campgrounds/:id", (req, res) => {
 
 // ===============
 // comments route
-app.get("/campgrounds/:id/comments/new", (req, res) => {
+// ===============
+app.get("/campgrounds/:id/comments/new", isLoggedIn, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if(err){
       console.log(err);
@@ -69,7 +92,7 @@ app.get("/campgrounds/:id/comments/new", (req, res) => {
   })
 });
 
-app.post("/campgrounds/:id/comments", (req, res) => {
+app.post("/campgrounds/:id/comments", isLoggedIn, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if(err){
       console.log(err);
@@ -87,6 +110,55 @@ app.post("/campgrounds/:id/comments", (req, res) => {
     }
   });
 });
+// ===============
+
+// ===============
+// auth routes
+// ===============
+// user registration
+app.get("/sign_up", (req, res) => {
+  res.render("users/sign_up");
+});
+
+app.post("/sign_up", (req, res) => {
+  const newUser = new User({ username: req.body.username });
+
+  User.register(newUser, req.body.password, (err, user) => {
+    if(err){
+      console.log(err)
+      return res.render("/sign_up");
+    }
+    passport.authenticate("local")(req, res, () =>{
+      res.redirect("/campgrounds");
+    });
+  });
+});
+
+// user login
+app.get("/login", (req, res) => {
+  res.render("users/login");
+});
+
+app.post("/login", passport.authenticate("local",
+  {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+  }), (req, res) => {
+});
+
+// user logout
+app.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/")
+});
+
+// middleware logic to make sure user is logged in before seeing/performing a request
+function isLoggedIn(req, res, next){
+  if(req.isAuthenticated()){
+    return next();
+  }
+  res.redirect("/login");
+}
 // ===============
 
 app.listen(3000, () => {

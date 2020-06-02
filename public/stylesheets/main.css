@@ -8,6 +8,11 @@
   flex-wrap: wrap;
 }
 
+.fa-yelp {
+  color: white;
+  margin-right: 5px;
+}
+
 .form-title {
   text-align: center;
 }
