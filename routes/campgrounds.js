@@ -21,8 +21,22 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 // create
 router.post('/', isLoggedIn, (req, res) => {
+  // get username and id from campground author object
+  const author = {
+    id: req.user._id,
+    username: req.user.username,
+  };
+
+  // grab campground schema and associate it to the form along with author
+  const newCampground = {
+    name: req.body.campground.name,
+    image: req.body.campground.image,
+    description: req.body.campground.description,
+    author: author,
+  };
+
   // create a new campground and save to db
-  Campground.create(req.body.campground, (err, newlyCreated) => {
+  Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
       console.log(err);
     } else {

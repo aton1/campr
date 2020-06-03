@@ -45,12 +45,4 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-// middleware logic to make sure user is logged in before seeing/performing a request
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
-
 module.exports = router;
