@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
+const Comment = require('../models/comment');
 
 // index
 router.get('/', (req, res) => {
@@ -47,11 +48,65 @@ router.post('/', isLoggedIn, (req, res) => {
 
 // show
 router.get('/:id', (req, res) => {
-  Campground.findById(req.params.id).populate('comments').exec((err, foundCampground) => {
+  Campground.findById(req.params.id)
+      .populate('comments')
+      .exec(
+          (err, foundCampground) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.render('campgrounds/show', {campground: foundCampground});
+            }
+          });
+});
+
+// edit
+router.get('/:id/edit', (req, res) => {
+  Campground.findById(req.params.id, (err, foundCampground) => {
     if (err) {
       console.log(err);
+      res.redirect('/campground');
     } else {
-      res.render('campgrounds/show', {campground: foundCampground});
+      res.render('campgrounds/edit', {campground: foundCampground});
+    }
+  });
+});
+
+// update
+router.put('/:id', (req, res) => {
+  Campground.findByIdAndUpdate(
+      req.params.id,
+      req.body.campground,
+      (err, updatedCampground) => {
+        if (err) {
+          console.log(err);
+          res.redirect('/:id/edit');
+        } else {
+          res.redirect('/campgrounds/' + req.params.id);
+        }
+      });
+});
+
+// destroys campground and associated comments
+router.delete('/:id', (req, res) => {
+  Campground.findByIdAndRemove(req.params.id, (err, removedCampground) => {
+    if (err) {
+      console.log(err);
+      res.redirect('/campgrounds/' + req.params.id);
+    } else {
+      Comment.deleteMany({
+        _id:
+        {
+          $in: removedCampground.comments,
+        },
+      }, (err) => {
+        if (err) {
+          console.log(err);
+          res.redirect('/campgrounds/' + req.params.id);
+        } else {
+          res.redirect('/campgrounds');
+        }
+      });
     }
   });
 });
