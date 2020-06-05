@@ -9,6 +9,7 @@ const data = [
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
     {
+      id: '588c2e092403d111454fff71',
       username: 'aton',
     },
   },
@@ -18,6 +19,7 @@ const data = [
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
     {
+      id: '588c2e092403d111454fff71',
       username: 'aton',
     },
   },
@@ -27,7 +29,18 @@ const data = [
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
     {
+      id: '588c2e092403d111454fff71',
       username: 'aton',
+    },
+  },
+  {
+    name: 'Camp City',
+    image: 'https://cdn.pixabay.com/photo/2020/02/04/10/42/camping-4817872_1280.jpg',
+    description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
+    author: 
+    {
+      id: '5ed5f96131224f80a45f6b22',
+      username: 'user-1',
     },
   },
 ];
@@ -57,6 +70,7 @@ function seedDB() {
                   text: 'This place is great for a getaway from the city!',
                   author: 
                   {
+                    id: '588c2e092403d111454fff71',
                     username: 'deadpool'
                   },
                 }, (err, comment) => {

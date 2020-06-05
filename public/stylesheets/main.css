@@ -9,7 +9,7 @@
 }
 
 .fa-yelp {
-  color: white;
+  color: rgb(255, 255, 255);
   margin-right: 5px;
 }
 
@@ -19,6 +19,10 @@
 
 .img-thumbnail img {
   width: 100%;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgb(255, 255, 255);
 }
 
 .new-form {
