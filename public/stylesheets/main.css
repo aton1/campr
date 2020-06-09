@@ -30,6 +30,10 @@
   margin: 25px auto;
 }
 
+figcaption > p:nth-of-type(1), #comment {
+  white-space: pre-wrap;
+}
+
 nav {
   margin-bottom: 25px;
 }

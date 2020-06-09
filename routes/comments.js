@@ -3,9 +3,11 @@ const express = require('express');
 const router = express.Router({mergeParams: true});
 const Campground = require('../models/campground');
 const Comment = require('../models/comment');
+const middleware = require('../middleware');
+const commentMiddleware = require('../middleware/comments');
 
-// comments new
-router.get('/new', isLoggedIn, (req, res) => {
+// new
+router.get('/new', middleware.isLoggedIn, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if (err) {
       console.log(err);
@@ -15,8 +17,8 @@ router.get('/new', isLoggedIn, (req, res) => {
   });
 });
 
-// comments create
-router.post('/', isLoggedIn, (req, res) => {
+// create
+router.post('/', middleware.isLoggedIn, (req, res) => {
   Campground.findById(req.params.id, (err, campground) => {
     if (err) {
       console.log(err);
@@ -45,12 +47,45 @@ router.post('/', isLoggedIn, (req, res) => {
   });
 });
 
-// middleware logic to make sure user is logged in before seeing/performing a request
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect('/login');
-}
+// edit
+router.get('/:comment_id/edit', commentMiddleware.verifyCommentOwnership, (req, res) => {
+  Comment.findById(req.params.comment_id, (err, foundComment) => {
+    if (err) {
+      console.log(err);
+      res.redirect('back');
+    } else {
+      res.render('comments/edit', {campground_id: req.params.id, comment: foundComment});
+    }
+  });
+});
+
+// update
+router.put('/:comment_id', commentMiddleware.verifyCommentOwnership, (req, res) => {
+  Comment.findByIdAndUpdate(
+    req.params.comment_id, 
+    req.body.comment,
+    (err, updatedComment) => {
+      if (err) {
+        console.log(err);
+        res.redirect('/:comment_id');
+     } else {
+        res.redirect('/campgrounds/' + req.params.id);
+      }
+    }); 
+});
+
+// destroy
+router.delete('/:comment_id', commentMiddleware.verifyCommentOwnership, (req, res) => {
+  Comment.findByIdAndDelete(
+    req.params.comment_id, 
+    (err, removedComment) => {
+      if (err) {
+        console.log(err);
+        res.redirect('/:comment_id');
+      } else {
+        res.redirect('/campgrounds/' + req.params.id);
+      }
+  });
+});
 
 module.exports = router;
