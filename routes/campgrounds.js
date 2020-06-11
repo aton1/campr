@@ -42,7 +42,10 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
       console.log(err);
+      req.flash('error', 'Unable to create campground');
+      res.redirect('/new');
     } else {
+      req.flash('success', 'Successfully added campground');
       res.redirect('/campgrounds');
     }
   });
@@ -54,8 +57,10 @@ router.get('/:id', (req, res) => {
       .populate('comments')
       .exec(
           (err, foundCampground) => {
-            if (err) {
+            if (err || !foundCampground) {
               console.log(err);
+              req.flash('error', 'Campground not found');
+              res.redirect('/campgrounds');
             } else {
               res.render('campgrounds/show', {campground: foundCampground});
             }
@@ -81,8 +86,10 @@ router.put('/:id', campgroundMiddleware.verifyCampgroundOwnership, (req, res) =>
       (err, updatedCampground) => {
         if (err) {
           console.log(err);
+          req.flash('error', 'Unable to edit campground');
           res.redirect('/:id/edit');
         } else {
+          req.flash('success', 'Successfully updated campground');
           res.redirect('/campgrounds/' + req.params.id);
         }
       });
@@ -93,6 +100,7 @@ router.delete('/:id', campgroundMiddleware.verifyCampgroundOwnership, (req, res)
   Campground.findByIdAndRemove(req.params.id, (err, removedCampground) => {
     if (err) {
       console.log(err);
+      req.flash('error', 'Unable to delete campground');
       res.redirect('/campgrounds/' + req.params.id);
     } else {
       Comment.deleteMany({
@@ -103,8 +111,10 @@ router.delete('/:id', campgroundMiddleware.verifyCampgroundOwnership, (req, res)
       }, (err) => {
         if (err) {
           console.log(err);
+          req.flash('error', 'Unable to delete comments');
           res.redirect('/campgrounds/' + req.params.id);
         } else {
+          req.flash('success', 'Successfully deleted campground and comments');
           res.redirect('/campgrounds');
         }
       });

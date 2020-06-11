@@ -8,6 +8,7 @@ const Campground = require('./models/campground');
 const Comment = require('./models/comment');
 const seedDB = require('./seeds');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 const app = express();
 
 // requiring routes
@@ -20,6 +21,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
+app.use(flash());
 
 seedDB();
 
@@ -36,9 +38,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// middleware that will run for every route to pass in the username/username._id
+// allowing each template to access currentUser and flash messages
 app.use((req, res, next) => {
   res.locals.currentUser = req.user;
+  res.locals.error = req.flash('error');
+  res.locals.success = req.flash('success');
   next();
 });
 

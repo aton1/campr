@@ -5,18 +5,21 @@ const campgroundMiddlewareObj = {};
 campgroundMiddlewareObj.verifyCampgroundOwnership = (req, res, next) => {
   if (req.isAuthenticated()) {
     Campground.findById(req.params.id, (err, foundCampground) => {
-      if (err) {
+      if (err || !foundCampground) {
         console.log(err);
+        req.flash('error', 'Campground not found');
         res.redirect('back');
       } else {
         if (foundCampground.author.id.equals(req.user._id)) {
           next();
         } else {
+          req.flash('error', 'Insufficient permissions');
           res.redirect('back');
         }
       }
     });
   } else {
+    req.flash('error', 'You are not logged in');
     res.redirect('back');
   }
 }
