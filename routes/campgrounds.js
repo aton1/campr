@@ -33,6 +33,7 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
   // grab campground schema and associate it to the form data
   const newCampground = {
     name: req.body.campground.name,
+    price: req.body.campground.price,
     image: req.body.campground.image,
     description: req.body.campground.description,
     author: author,

@@ -3,9 +3,10 @@
   <header class="jumbotron">
     <div class="container">
       <h1>campr.</h1>
-      <p>View our hand-picked campgrounds from all over the world</p>
+      <i class="fa fa-area-chart fa-3x" aria-hidden="true"></i>
+      <p class="d-inline">View our hand-picked campgrounds from all over the world!</p>
       <p class="mt-4">
-        <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Campground</a>
+        <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add Campground</a>
       </p>
     </div>
   </header>
@@ -17,7 +18,8 @@
             <img class="img-fluid" src="<%= campground.image %>">
             <figcaption class="figure-caption py-2">
               <h4><%= campground.name %></h4>
-              <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>">More Info</a>
+              <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>"><i class="fa fa-info-circle" aria-hidden="true"></i>
+                More Info</a>
             </figcaption>
           </figure>
         </div>

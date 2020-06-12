@@ -5,6 +5,7 @@ const Comment = require('./models/comment');
 const data = [
   {
     name: 'Cloud\'s Rest',
+    price: '10.01',
     image: 'https://cdn.pixabay.com/photo/2016/01/19/16/48/teepee-1149402_1280.jpg',
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
@@ -15,6 +16,7 @@ const data = [
   },
   {
     name: 'Canyon',
+    price: '8.91',
     image: 'https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_1280.jpg',
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
@@ -25,6 +27,7 @@ const data = [
   },
   {
     name: 'Fire Treat',
+    price: '100.11',
     image: 'https://cdn.pixabay.com/photo/2019/10/03/11/14/camp-4522970_1280.jpg',
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
@@ -35,6 +38,7 @@ const data = [
   },
   {
     name: 'Camp City',
+    price: '1111.01',
     image: 'https://cdn.pixabay.com/photo/2020/02/04/10/42/camping-4817872_1280.jpg',
     description: 'Nulla bibendum dolor tincidunt, venenatis mi ac, bibendum metus. Donec dolor ante, scelerisque vitae augue vel, rutrum tristique felis. Pellentesque sed est eu sem venenatis bibendum. Aliquam malesuada aliquam tortor quis laoreet. Integer ut libero lorem. Etiam aliquet interdum magna, a semper lectus congue sit amet. Nam at nunc viverra ex tristique pulvinar. Curabitur vestibulum diam a rhoncus venenatis. Mauris sem ligula, efficitur pharetra magna vitae, vehicula condimentum urna. Etiam accumsan nunc in libero pellentesque pulvinar. Vivamus aliquam neque quis sapien congue ultrices. Proin rhoncus magna at quam scelerisque pretium. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque convallis massa sed lacus iaculis, eu convallis libero pharetra. Donec rhoncus bibendum risus vel dictum.',
     author: 
