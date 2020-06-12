@@ -41,27 +41,27 @@
 }
 
 .slideshow li:nth-child(1) { 
-  background-image: url(http://i.imgur.com/K3mPv14.jpg) 
+  background-image: url(https://cdn.pixabay.com/photo/2016/11/29/09/09/abstract-1868624_1280.jpg) 
 }
 
 .slideshow li:nth-child(2) { 
   animation-delay: 10s; 
-  background-image: url(http://i.imgur.com/SBEmFpv.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2016/11/22/23/08/adventure-1851092_1280.jpg);
 }
 
 .slideshow li:nth-child(3) { 
   animation-delay: 20s; 
-  background-image: url(http://i.imgur.com/emvhOnb.jpg);
+  background-image: url(http://i.imgur.com/K3mPv14.jpg);
 }
 
 .slideshow li:nth-child(4) { 
   animation-delay: 30s; 
-  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
+  background-image: url(https://cdn.pixabay.com/photo/2016/02/09/16/35/night-1189929_1280.jpg);
 }
 
 .slideshow li:nth-child(5) { 
   animation-delay: 40s; 
-  background-image: url(http://i.imgur.com/TVGe0Ef.jpg);
+  background-image: url(http://i.imgur.com/2LSMCmJ.jpg);
 }
 
 body {
