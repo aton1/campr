@@ -9,6 +9,8 @@ const Comment = require('./models/comment');
 const seedDB = require('./seeds');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
+const port = process.env.PORT || 3000;
+const databaseUrl = process.env.DATABASEURL || 'mongodb://localhost:27017/campr';
 const app = express();
 
 // requiring routes
@@ -16,14 +18,15 @@ const campgroundRoutes = require('./routes/campgrounds');
 const commentRoutes = require('./routes/comments');
 const indexRoutes = require('./routes/index');
 
-mongoose.connect('mongodb://localhost:27017/campr', {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+mongoose.connect(databaseUrl, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
+
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(__dirname + '/public'));
 app.use(methodOverride('_method'));
 app.use(flash());
 
-seedDB();
+// seedDB();
 
 app.locals.moment = require('moment');
 
@@ -53,6 +56,6 @@ app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/comments', commentRoutes);
 app.use('/', indexRoutes);
 
-app.listen(3000, () => {
+app.listen(port, () => {
   console.log('campr. server started');
 });
