@@ -1,6 +1,6 @@
 .card {
-  margin-top: 25px;
-  margin-bottom: 80px;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .card-title {
@@ -8,12 +8,16 @@
   flex-wrap: wrap;
 }
 
+.checked {
+  color: #FFA500;
+}
+
 .fa-tree {
   color: rgb(255, 255, 255);
   margin-right: 5px;
 }
 
-.form-title {
+.form-title, .review-title {
   text-align: center;
 }
 
@@ -30,7 +34,12 @@
   margin: 25px auto;
 }
 
-figcaption > p:nth-of-type(1), #comment {
+.review-btn {
+  margin-bottom: 15px;
+  margin-top: 25px;
+}
+
+figcaption > p:nth-of-type(1), #comment, .review {
   white-space: pre-wrap;
 }
 

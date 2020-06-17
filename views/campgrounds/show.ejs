@@ -29,6 +29,53 @@
         </figure>
       </div>
       <div class="card card-body bg-light">
+        <% if(campground.rating === 0) { %>
+          <div class="text-right">
+            <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/reviews/new">Add Review</a>
+          </div>
+          <hr>
+          <em>No reviews yet.</em>
+        <% } else { %>
+          <div class="text-right">
+            <a class="btn btn-success" href="/campgrounds/<%= campground._id %>/reviews">View All Reviews</a>
+          </div>
+          <div>
+            <span class="fa fa-star checked"></span>
+            <span class="fa fa-star <% if(campground.rating > 1.5) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if(campground.rating > 2.5) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if(campground.rating > 3.5) { %> checked <% } %>"></span>
+            <span class="fa fa-star <% if(campground.rating > 4.5) { %> checked <% } %>"></span>
+          </div>
+          <div class="mt-1">
+            Campground Rating: <%= campground.rating.toFixed(2) %>
+          </div>
+          <p class="mb-0 mt-1">
+            <em>Total Reviews: <%= campground.reviews.length %></em>
+          </p>
+          <hr>
+          <% campground.reviews.slice(0,5).forEach((review) => { %>
+            <div class="row">
+              <div class="col-md-12">
+                <strong><%= review.author.username %></strong>
+                <span class="float-right"><%= moment(review.updatedAt).fromNow() %></span>
+                <div>
+                  <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %>
+                </div>
+                <p class="review mt-2"><%= review.text %></p>
+                <% if(currentUser && review.author.id.equals(currentUser._id)) { %>
+                  <p class="d-inline">
+                    <a class="btn btn-sm btn-warning" href="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>/edit">Edit</a>
+                    <form class="d-inline" action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                  </p>
+                <% } %>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+      <div class="card card-body bg-light">
         <div class="text-right">
           <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>/comments/new">Add Comment</a>
         </div>

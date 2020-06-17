@@ -17,6 +17,7 @@ const app = express();
 const campgroundRoutes = require('./routes/campgrounds');
 const commentRoutes = require('./routes/comments');
 const indexRoutes = require('./routes/index');
+const reviewRoutes = require('./routes/reviews');
 
 mongoose.connect(databaseUrl, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
@@ -55,6 +56,7 @@ app.use((req, res, next) => {
 app.use('/campgrounds', campgroundRoutes);
 app.use('/campgrounds/:id/comments', commentRoutes);
 app.use('/', indexRoutes);
+app.use('/campgrounds/:id/reviews', reviewRoutes);
 
 app.listen(port, () => {
   console.log('campr. server started');

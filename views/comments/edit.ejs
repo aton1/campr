@@ -14,9 +14,7 @@
       <form action="/campgrounds/<%= campground_id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
         <button class="btn btn-lg btn-danger btn-block">Delete</button>
       </form>
-      <p class="py-3">
-        <a href="/campgrounds/<%= campground_id %>">< Go Back</a>
-      </p>
+      <a class="btn btn-default py-3 px-0" href="/campgrounds/<%= campground_id %>"><i class="fa fa-arrow-left"></i> Go Back</a>
     </div>
   </div>
 </div>

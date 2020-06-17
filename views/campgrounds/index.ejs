@@ -18,9 +18,19 @@
             <img class="img-fluid" src="<%= campground.image %>">
             <figcaption class="figure-caption py-2">
               <h4><%= campground.name %></h4>
-              <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>"><i class="fa fa-info-circle" aria-hidden="true"></i>
-                More Info</a>
+              <% if(campground.rating === 0) { %>
+                <em>No reviews yet</em>
+              <% } else { %>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star <% if(campground.rating > 1.5) { %> checked <% } %>"></span>
+                <span class="fa fa-star <% if(campground.rating > 2.5) { %> checked <% } %>"></span>
+                <span class="fa fa-star <% if(campground.rating > 3.5) { %> checked <% } %>"></span>
+                <span class="fa fa-star <% if(campground.rating > 4.5) { %> checked <% } %>"></span>
+              <% } %> 
             </figcaption>
+            <a class="btn btn-primary" href="/campgrounds/<%= campground._id %>"><i class="fa fa-info-circle" aria-hidden="true"></i>
+              More Info
+            </a>
           </figure>
         </div>
       </div>

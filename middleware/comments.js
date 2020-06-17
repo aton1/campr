@@ -7,7 +7,7 @@ commentMiddlewareObj.verifyCommentOwnership = (req, res, next) => {
       if (err || !foundComment) {
         console.log(err);
         req.flash('error', 'Comment not found');
-        res.redirect('/campgrounds');
+        res.redirect(`/campgrounds/${req.params.id}`);
       } else {
         if (foundComment.author.id.equals(req.user._id)) {
           next();
