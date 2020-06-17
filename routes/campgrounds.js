@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Campground = require('../models/campground');
 const Comment = require('../models/comment');
+const Review = require('../models/review');
 const middleware = require('../middleware');
 const campgroundMiddleware = require('../middleware/campgrounds');
 
@@ -55,7 +56,12 @@ router.post('/', middleware.isLoggedIn, (req, res) => {
 // show
 router.get('/:id', (req, res) => {
   Campground.findById(req.params.id)
-      .populate('comments')
+      .populate({
+        path: 'comments',
+        options: {sort: {createdAt: -1}}})
+      .populate({
+        path: 'reviews',
+        options: {sort: {createdAt: -1}}})
       .exec(
           (err, foundCampground) => {
             if (err || !foundCampground) {
@@ -81,6 +87,7 @@ router.get('/:id/edit', campgroundMiddleware.verifyCampgroundOwnership, (req, re
 
 // update
 router.put('/:id', campgroundMiddleware.verifyCampgroundOwnership, (req, res) => {
+  delete req.body.campground.rating;
   Campground.findByIdAndUpdate(
       req.params.id,
       req.body.campground,
@@ -91,7 +98,7 @@ router.put('/:id', campgroundMiddleware.verifyCampgroundOwnership, (req, res) =>
           res.redirect('/:id/edit');
         } else {
           req.flash('success', 'Successfully updated campground');
-          res.redirect('/campgrounds/' + req.params.id);
+          res.redirect(`/campgrounds/${req.params.id}`);
         }
       });
 });
@@ -102,20 +109,30 @@ router.delete('/:id', campgroundMiddleware.verifyCampgroundOwnership, (req, res)
     if (err) {
       console.log(err);
       req.flash('error', 'Unable to delete campground');
-      res.redirect('/campgrounds/' + req.params.id);
+      res.redirect(`/campgrounds/${req.params.id}`);
     } else {
       Comment.deleteMany({
-        _id:
-        {
+        _id: {
           $in: removedCampground.comments,
         },
       }, (err) => {
         if (err) {
           console.log(err);
           req.flash('error', 'Unable to delete comments');
-          res.redirect('/campgrounds/' + req.params.id);
+          res.redirect(`/campgrounds/${req.params.id}`);
         } else {
-          req.flash('success', 'Successfully deleted campground and comments');
+          Review.deleteMany({
+            _id: {
+              $in: removedCampground.reviews,
+            },
+          }, (err) => {
+            if (err) {
+              console.log(err);
+              req.flash('error', 'Unable to delete reviews');
+              res.redirect(`/campgrounds/${req.params.id}`);
+            }
+          });
+          req.flash('success', 'Successfully deleted campground');
           res.redirect('/campgrounds');
         }
       });

@@ -8,12 +8,16 @@
   flex-wrap: wrap;
 }
 
+.checked {
+  color: #FFA500;
+}
+
 .fa-tree {
   color: rgb(255, 255, 255);
   margin-right: 5px;
 }
 
-.form-title {
+.form-title, .review-title {
   text-align: center;
 }
 
@@ -30,7 +34,7 @@
   margin: 25px auto;
 }
 
-figcaption > p:nth-of-type(1), #comment {
+figcaption > p:nth-of-type(1), #comment, .review {
   white-space: pre-wrap;
 }
 
