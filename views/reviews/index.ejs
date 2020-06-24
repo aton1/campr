@@ -33,17 +33,19 @@
             <div>
               <div>
                 <hr>
-                <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %>
                 <div>
                   Reviewed by: 
                   <strong>
                     <%= review.author.username %>
                   </strong>
+                  <div>
+                    <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %>
+                  </div>
                 </div>
                 <span>
                   <em><%= review.updatedAt.toDateString() %></em>
                 </span>
-                <p class="review"><%= review.text %></p>
+                <p class="review mt-2"><%= review.text %></p>
                 <% if(currentUser && review.author.id.equals(currentUser._id)) { %>
                   <a class="btn btn-sm btn-warning mb-2" href="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>/edit">Edit</a>
                   <form class="d-inline" action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
