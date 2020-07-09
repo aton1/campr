@@ -10,7 +10,7 @@ campgroundMiddlewareObj.verifyCampgroundOwnership = (req, res, next) => {
         req.flash('error', 'Campground not found');
         res.redirect('/campgrounds');
       } else {
-        if (foundCampground.author.id.equals(req.user._id)) {
+        if (foundCampground.author.id.equals(req.user._id) || req.user.admin) {
           next();
         } else {
           req.flash('error', 'Insufficient permissions');

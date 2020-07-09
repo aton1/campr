@@ -10,7 +10,7 @@ reviewMiddlewareObj.checkReviewOwnership = (req, res, next) => {
         req.flash('error', 'Review not found');
         res.redirect(`/campgrounds/${req.params.id}/reviews`);
       } else {
-        if (foundReview.author.id.equals(req.user._id)) {
+        if (foundReview.author.id.equals(req.user._id) || req.user.admin) {
           next();
         } else {
           req.flash('error', 'Insufficient Permissions');
@@ -33,7 +33,7 @@ reviewMiddlewareObj.checkReviewExists = (req, res, next) => {
         res.redirect('/campgrounds');
       } else {
         const foundUserReview = foundCampground.reviews.some((review) => {
-          return review.author.id.equals(req.user._id);
+          return (review.author.id.equals(req.user._id) || req.user.admin);
         });
         if (foundUserReview) {
           req.flash('error', 'You already reviewed this campground');
