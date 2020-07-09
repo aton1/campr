@@ -9,7 +9,7 @@ commentMiddlewareObj.verifyCommentOwnership = (req, res, next) => {
         req.flash('error', 'Comment not found');
         res.redirect(`/campgrounds/${req.params.id}`);
       } else {
-        if (foundComment.author.id.equals(req.user._id)) {
+        if (foundComment.author.id.equals(req.user._id) || req.user.admin) {
           next();
         } else {
           req.flash('error', 'Insufficient permissions');
